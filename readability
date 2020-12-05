@@ -1,0 +1,42 @@
+#include <stdio.h>
+#include <string.h>
+#include <cs50.h>
+
+int main(void)
+{
+    int sentence=0, word=1,letter=0,i;
+    string s = get_string("String: ");
+
+    for(i=0;i<strlen(s);i++)
+    {
+        if((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
+            letter++;
+
+        if(s[i] == ' ')
+            word++;
+
+        if(s[i] == '.' || s[i] == '!' || s[i] == '?')
+            sentence++;
+    }
+
+    //printf("Letters: %d\n", letter);
+    //printf("Words: %d\n", word);
+    //printf("Sentence: %d\n", sentence);
+
+    float index = 0.0588 * letter/word*100 - 0.296 * sentence/word*100 - 15.8;
+
+    if(index < 1)
+    {
+        printf("Before Grade 1\n");
+    }
+
+    else if(index > 16)
+    {
+        printf("Grade 16+\n");
+    }
+
+    else
+    {
+        printf("Grade %.0f\n", index);
+    }
+}
